@@ -20,6 +20,7 @@
 
 3. 打开工程编译，编译之后即可下载，需配套我司提供的硬件
 
+4. ZLG_Thermometer_136对应的硬件为ZLG_Thermometer_136_HW，包含原理图工程、PCB源文件。
 
 > AMetal包中\board\aml13x_core\project_example\project_keil5工程 是HC32L13x系列芯片的外设示例，以及包含各种组件的使用
 >
@@ -33,6 +34,7 @@
 
 3. 打开工程编译，编译之后即可下载，需配套我司提供的硬件
 
+4. ZLG_Thermometer_166对应的硬件为ZLG_Thermometer_166_HW，包含原理图工程、PCB源文件。
 
 > AMetal包中\board\aml166_core\project_example\project_keil5工程 是ZML166N32A系列芯片的外设示例，以及包含各种组件的使用
 >
