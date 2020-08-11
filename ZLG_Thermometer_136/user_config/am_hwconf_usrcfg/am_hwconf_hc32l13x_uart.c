@@ -38,11 +38,9 @@
 static void __hc32_plfm_uart0_init (void)
 {
     am_clk_enable(CLK_UART0);
-    am_gpio_pin_cfg(PIOA_9, PIOA_9_UART0_TXD | PIOA_9_OUT_PP);
-    am_gpio_pin_cfg(PIOA_10, PIOA_10_UART0_RXD | PIOA_10_INPUT_FLOAT);
 
-//    am_gpio_pin_cfg(PIOB_8,  PIOB_8_UART0_TXD  | PIOB_8_OUT_PP );
-//    am_gpio_pin_cfg(PIOB_9, PIOB_9_UART0_RXD | PIOB_9_INPUT_FLOAT);
+    am_gpio_pin_cfg(PIOA_9,  PIOA_9_UART0_TXD  | PIOA_9_OUT_PP );
+    am_gpio_pin_cfg(PIOA_10, PIOA_10_UART0_RXD | PIOA_10_INPUT_FLOAT);
 }
 
 /** \brief 解除串口0平台初始化 */
@@ -50,42 +48,29 @@ static void __hc32_plfm_uart0_deinit (void)
 {
     am_clk_disable(CLK_UART0);
 
-	am_gpio_pin_cfg(PIOA_9, PIOA_9_GPIO | PIOA_9_INPUT_PU);
+    am_gpio_pin_cfg(PIOA_9, PIOA_9_GPIO  | PIOA_9_INPUT_PU);
     am_gpio_pin_cfg(PIOA_10, PIOA_10_GPIO | PIOA_10_INPUT_PU);
-
-//    am_gpio_pin_cfg(PIOB_8, PIOB_8_GPIO | PIOB_8_INPUT_PU);
-//    am_gpio_pin_cfg(PIOB_9, PIOB_9_GPIO | PIOB_9_INPUT_PU);
 }
 
 /** \brief 串口0设备信息 */
 static const am_hc32_uart_devinfo_t __g_uart0_devinfo = {
 
-    HC32_UART0_BASE,            /**< \brief 串口0 */
-    INUM_UART0_2,                 /**< \brief 串口0的中断编号 */
-    AMHW_HC32_UART_WORK_MODE_1, /**< \brief 串口工作模式 */
+    HC32_UART0_BASE,                /**< \brief 串口0 */
+    INUM_UART0_2,                   /**< \brief 串口0的中断编号 */
+    CLK_UART0,                      /**< \brief 串口时钟ID */
 
-    AMHW_HC32_UART_PARITY_NO |  /**< \brief 无极性 */
-    AMHW_HC32_UART_STOP_1_0_BIT,/**< \brief 1个停止位 */
+    AMHW_HC32_UART_PARITY_NO |      /**< \brief 无极性 */
+    AMHW_HC32_UART_STOP_1_0_BIT,    /**< \brief 1个停止位 */
 
-    115200,                       /**< \brief 设置的波特率 */
+    AM_FALSE,                       /**< \brief 不使用异步半双工（单线）模式 */
 
-    0,                            /**< \brief 无其他中断 */
+    115200,                         /**< \brief 设置的波特率 */
 
-    {
-        AM_FALSE,                 /**< \brief 禁能多机地址自动识别 */
-        0x00,                     /**< \brief 地址0x00 */
-        0x00,                     /**< \brief 地址全部不关心 */
-    },
+    0,                              /**< \brief 无其他中断 */
 
-    {
-        AM_FALSE,                 /**< \brief 禁能流控 */
-        0,                        /**< \brief CTS引脚编号 */
-        0,                        /**< \brief RTS引脚编号*/
-    },
-
-    NULL,                         /**< \brief 使用RS485 */
-    __hc32_plfm_uart0_init,     /**< \brief UART0的平台初始化 */
-    __hc32_plfm_uart0_deinit,   /**< \brief UART0的平台去初始化 */
+    NULL,                           /**< \brief 使用RS485 */
+    __hc32_plfm_uart0_init,         /**< \brief UART0的平台初始化 */
+    __hc32_plfm_uart0_deinit,       /**< \brief UART0的平台去初始化 */
 };
 
 /**< \brief 定义串口0 设备 */
@@ -108,8 +93,8 @@ static void __hc32_plfm_uart1_init (void)
 {
     am_clk_enable(CLK_UART1);
 
-    am_gpio_pin_cfg(PIOD_0, PIOD_0_UART1_TXD | PIOD_0_OUT_PP );
-    am_gpio_pin_cfg(PIOD_1, PIOD_1_UART1_RXD | PIOD_1_INPUT_FLOAT);
+    am_gpio_pin_cfg(PIOA_2, PIOA_2_UART1_TXD | PIOA_2_OUT_PP );
+    am_gpio_pin_cfg(PIOA_3, PIOA_3_UART1_RXD | PIOA_3_INPUT_FLOAT);
 }
 
 /** \brief 解除串口1平台初始化 */
@@ -117,39 +102,29 @@ static void __hc32_plfm_uart1_deinit (void)
 {
     am_clk_disable(CLK_UART1);
 
-    am_gpio_pin_cfg(PIOD_0, PIOD_0_GPIO | PIOD_0_INPUT_PU);
-    am_gpio_pin_cfg(PIOD_1, PIOD_1_GPIO | PIOD_1_INPUT_PU);
+    am_gpio_pin_cfg(PIOA_2, PIOA_2_GPIO | PIOA_2_INPUT_PU);
+    am_gpio_pin_cfg(PIOA_3, PIOA_3_GPIO | PIOA_3_INPUT_PU);
 }
 
 /** \brief 串口1设备信息 */
 static const am_hc32_uart_devinfo_t __g_uart1_devinfo = {
 
-    HC32_UART1_BASE,            /**< \brief 串口1 */
-    INUM_UART1_3,                 /**< \brief 串口1的中断编号 */
-    AMHW_HC32_UART_WORK_MODE_1, /**< \brief 串口工作模式 */
+    HC32_UART1_BASE,                /**< \brief 串口1 */
+    INUM_UART1_3,                   /**< \brief 串口1的中断编号 */
+    CLK_UART1,                      /**< \brief 串口时钟ID */
 
-    AMHW_HC32_UART_PARITY_NO |  /**< \brief 无极性 */
-    AMHW_HC32_UART_STOP_1_0_BIT,/**< \brief 1个停止位 */
+    AMHW_HC32_UART_PARITY_NO |      /**< \brief 无极性 */
+    AMHW_HC32_UART_STOP_1_0_BIT,    /**< \brief 1个停止位 */
 
-    115200,                       /**< \brief 设置的波特率 */
+    AM_FALSE,                       /**< \brief 不使用异步半双工（单线）模式 */
 
-    0,                            /**< \brief 无其他中断 */
+    115200,                         /**< \brief 设置的波特率 */
 
-    {
-        AM_FALSE,                 /**< \brief 禁能多机地址自动识别 */
-        0x00,                     /**< \brief 地址0x00 */
-        0x00,                     /**< \brief 地址全部不关心 */
-    },
+    0,                              /**< \brief 无其他中断 */
 
-    {
-        AM_FALSE,                 /**< \brief 禁能流控 */
-        0,                        /**< \brief CTS引脚编号 */
-        0,                        /**< \brief RTS引脚编号*/
-    },
-
-    NULL,                         /**< \brief 使用RS485 */
-    __hc32_plfm_uart1_init,     /**< \brief UART1的平台初始化 */
-    __hc32_plfm_uart1_deinit,   /**< \brief UART1的平台去初始化 */
+    NULL,                           /**< \brief 使用RS485 */
+    __hc32_plfm_uart1_init,         /**< \brief UART1的平台初始化 */
+    __hc32_plfm_uart1_deinit,       /**< \brief UART1的平台去初始化 */
 };
 
 /**< \brief 定义串口1 设备 */
