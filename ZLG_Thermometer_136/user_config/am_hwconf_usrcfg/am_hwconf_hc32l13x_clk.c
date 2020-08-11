@@ -120,7 +120,7 @@ static const am_hc32_clk_devinfo_t __g_clk_devinfo =
     /**
      * \brief PCLK分频系数，PCLK = HCLK / (2 ^ pclk_div)
      */
-    0,
+    1,
 
     /** \brief 平台初始化函数，配置引脚等工作 */
     __hc32_clk_plfm_init,

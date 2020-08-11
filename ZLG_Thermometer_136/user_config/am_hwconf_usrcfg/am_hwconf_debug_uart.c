@@ -35,30 +35,31 @@
  * \brief 使用的调试串口，默认 UART1
  * 1 - UART1; 2 - UART2; 3 - UART3
  */
-#define __DEBUG_UART            1
+#define __DEBUG_UART            0
 
 /** \brief 配置调试串口输出的波特率 */
 #define __DEBUG_BAUDRATE        115200
-am_uart_handle_t uart_handle = NULL;
 
 /** \brief 调试串口实例初始化 */
 am_uart_handle_t am_debug_uart_inst_init (void)
 {
+    am_uart_handle_t handle = NULL;
 
 #if (__DEBUG_UART == 0)
 
-    uart_handle = am_hc32_uart0_inst_init();
+    handle = am_hc32_uart0_inst_init();
 
     /* 调试初始化 */
-    am_debug_init(uart_handle, __DEBUG_BAUDRATE);
+    am_debug_init(handle, __DEBUG_BAUDRATE);
 
 #endif /* (__DEBUG_UART == 0) */
 
 #if (__DEBUG_UART == 1)
 
-    uart_handle = am_hc32_uart1_inst_init();
+    handle = am_hc32_uart1_inst_init();
+
     /* 调试初始化 */
-    am_debug_init(uart_handle, __DEBUG_BAUDRATE);
+    am_debug_init(handle, __DEBUG_BAUDRATE);
 
 #endif /* (__DEBUG_UART == 1) */
 
@@ -80,7 +81,7 @@ am_uart_handle_t am_debug_uart_inst_init (void)
 
 #endif /* (__DEBUG_UART == 3) */
 
-    return uart_handle;
+    return handle;
 }
 
 /**
